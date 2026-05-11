@@ -200,79 +200,27 @@ The component is now ready to use. You can see the preview on the right side of 
         return `import React, { useState } from 'react';
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle form submission here
   };
 
+  const inputClass = "w-full bg-transparent border-b border-zinc-700 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-400 transition-colors duration-200";
+
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
-        >
-          Send Message
+    <div className="max-w-md mx-auto p-10 bg-zinc-950 rounded-3xl ring-1 ring-white/10">
+      <p className="text-xs tracking-widest uppercase font-medium text-zinc-500 mb-2">Get in touch</p>
+      <h2 className="text-3xl font-light text-white tracking-tight mb-10">Contact Us</h2>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <input type="text" name="name" placeholder="Your name" value={formData.name} onChange={handleChange} required className={inputClass} />
+        <input type="email" name="email" placeholder="Email address" value={formData.email} onChange={handleChange} required className={inputClass} />
+        <textarea name="message" placeholder="Your message" value={formData.message} onChange={handleChange} required rows={4} className={inputClass + " resize-none"} />
+        <button type="submit" className="w-full bg-white text-zinc-900 font-medium py-3 rounded-full hover:bg-zinc-100 transition-all duration-200 mt-4">
+          Send Message →
         </button>
       </form>
     </div>
@@ -284,26 +232,27 @@ export default ContactForm;`;
       case "card":
         return `import React from 'react';
 
-const Card = ({ 
-  title = "Welcome to Our Service", 
+const Card = ({
+  title = "Welcome to Our Service",
   description = "Discover amazing features and capabilities that will transform your experience.",
   imageUrl,
-  actions 
+  actions
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
       {imageUrl && (
-        <img 
-          src={imageUrl} 
+        <img
+          src={imageUrl}
           alt={title}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover opacity-90"
         />
       )}
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-4">{description}</p>
+      <div className="p-8">
+        <p className="text-xs tracking-widest uppercase font-medium text-zinc-500 mb-3">Featured</p>
+        <h3 className="text-2xl font-light text-white tracking-tight mb-3">{title}</h3>
+        <p className="text-zinc-400 leading-relaxed mb-6">{description}</p>
         {actions && (
-          <div className="mt-4">
+          <div className="pt-4 border-t border-zinc-800">
             {actions}
           </div>
         )}
@@ -320,40 +269,28 @@ export default Card;`;
 const Counter = () => {
   const [count, setCount] = useState(0);
 
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
-
-  const reset = () => {
-    setCount(0);
-  };
-
   return (
-    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Counter</h2>
-      <div className="text-4xl font-bold mb-6">{count}</div>
-      <div className="flex gap-4">
-        <button 
-          onClick={decrement}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+    <div className="flex flex-col items-center p-10 bg-zinc-950 rounded-3xl ring-1 ring-white/10">
+      <p className="text-xs tracking-widest uppercase font-medium text-zinc-500 mb-6">Counter</p>
+      <div className="text-7xl font-thin text-white tracking-tight mb-10">{count}</div>
+      <div className="flex gap-3">
+        <button
+          onClick={() => setCount(c => c - 1)}
+          className="px-5 py-2.5 border border-white/20 text-white rounded-full text-sm hover:bg-white/10 transition-all duration-200"
         >
-          Decrease
+          −
         </button>
-        <button 
-          onClick={reset}
-          className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
+        <button
+          onClick={() => setCount(0)}
+          className="px-5 py-2.5 border border-white/10 text-zinc-500 rounded-full text-sm hover:border-white/20 hover:text-white transition-all duration-200"
         >
           Reset
         </button>
-        <button 
-          onClick={increment}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+        <button
+          onClick={() => setCount(c => c + 1)}
+          className="px-5 py-2.5 bg-white text-zinc-900 rounded-full text-sm font-medium hover:bg-zinc-100 transition-all duration-200"
         >
-          Increase
+          +
         </button>
       </div>
     </div>
@@ -369,9 +306,9 @@ export default Counter;`;
       case "form":
         return "    console.log('Form submitted:', formData);";
       case "card":
-        return '      <div className="p-6">';
+        return "        <p className=\"text-xs tracking-widest uppercase font-medium text-zinc-500 mb-3\">Featured</p>";
       default:
-        return "  const increment = () => setCount(count + 1);";
+        return "      <div className=\"text-7xl font-thin text-white tracking-tight mb-10\">{count}</div>";
     }
   }
 
@@ -380,9 +317,9 @@ export default Counter;`;
       case "form":
         return "    console.log('Form submitted:', formData);\n    alert('Thank you! We\\'ll get back to you soon.');";
       case "card":
-        return '      <div className="p-6 hover:bg-gray-50 transition-colors">';
+        return "        <p className=\"text-xs tracking-widest uppercase font-medium text-amber-500 mb-3\">Featured</p>";
       default:
-        return "  const increment = () => setCount(prev => prev + 1);";
+        return "      <div className=\"text-7xl font-thin text-white tracking-tight mb-10 tabular-nums\">{count}</div>";
     }
   }
 
@@ -392,14 +329,14 @@ export default Counter;`;
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-8">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-10">
       <div className="w-full max-w-md">
-        <Card 
+        <Card
           title="Amazing Product"
           description="This is a fantastic product that will change your life. Experience the difference today!"
           actions={
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-              Learn More
+            <button className="border border-white/20 text-white px-6 py-2.5 rounded-full text-sm hover:bg-white/10 transition-all duration-200">
+              Learn More →
             </button>
           }
         />
@@ -413,7 +350,7 @@ export default function App() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-8">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-10">
       <div className="w-full max-w-md">
         <${componentName} />
       </div>
